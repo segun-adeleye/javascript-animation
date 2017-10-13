@@ -1,0 +1,82 @@
+<!-- Smooth Implementation - no glitch -->
+<!-- final refactoring next -->
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Animation - Moving Ball</title>
+  <style>
+    #ball {
+      width: 50px;
+      height: 50px;
+      background: orange;
+      position: absolute;
+      border-radius: 25px;
+    }
+
+    #container {
+      width: 200px;
+      height: 200px;
+      background: brown;
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div id="ball"></div>
+  </div>
+
+  <script>
+    let position = 0;
+    let direction = 'right';
+    let side = 'left';
+    let difference = 1;
+
+    const ball = document.getElementById('ball');
+
+    const move = () => {
+      moveDirection(side);
+    }
+
+    const moveDirection = (newDirection) => {
+      position += difference
+      ball.style[newDirection] = `${position}px`
+      if (position === 150 || position === 0) {
+        switch (direction) {
+          case 'right':
+            position = 0;
+            direction = 'down';
+            side = 'top'
+            difference = 1;
+            break;
+          case 'down':
+            position = 150;
+            direction = 'left';
+            side = 'left';
+            difference = -1
+            break;
+          case 'left':
+            position = 150;
+            direction = 'up';
+            side = 'top'
+            difference = -1;
+            break;
+          default:
+            position = 0;
+            direction = 'right';
+            side = 'left'
+            difference = 1;
+            break;
+        }
+      }
+    }
+    setInterval(move, 10)
+
+  </script>
+</body>
+</html>
